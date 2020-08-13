@@ -12,7 +12,7 @@ source ~/mc/etc/profile.d/conda.sh
 echo "machine github.com" > $HOME/.netrc
 echo "login $GITHUB_USERNAME" >> $HOME/.netrc
 echo "password $GITHUB_TOKEN" >> $HOME/.netrc
-chmod -v go-rw $HOME/.netrc
+chmod -v 600 $HOME/.netrc
 
 # installation
 conda create -n botenv python=3.7 -y
