@@ -3,6 +3,10 @@
 # This script sets up the proper environemnt for
 # the auto-tick bot
 
+# git setup
+git config --global user.email nsls2forge@gmail.com
+git config --global user.name nsls2forge
+
 # install miniconda
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
 bash miniconda.sh -b -p ~/mc
