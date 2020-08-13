@@ -34,13 +34,19 @@ echo -e "xonsh\nevent-model\ncpplint" > names.txt
 echo "=================="
 cat names.txt
 echo "=================="
+# print env variables
+env | sort
+# clean current directory of bot files
+auto-tick clean
 # create graph with node_attrs/* and graph.json
-graph-utils make -o nsls-ii-forge -c -f names.txt -m 10
+time graph-utils make -o nsls-ii-forge -c -f names.txt -m 10
 # update graph with new versions from their sources (see versions/*)
-graph-utils update
+time graph-utils update
 # dry run of migrations to catch errors before PRs
 auto-tick run --dry-run
 # full run of migrations and submit PRs (see pr_json/*)
-auto-tick run
+time auto-tick run
 # output status of migrations to status/*
 auto-tick status
+# cleanup
+auto-tick clean
