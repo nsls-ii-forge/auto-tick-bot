@@ -1,13 +1,18 @@
 #!/bin/bash
 
+# names.txt will have to be provided with a list of package names
+# separated by a line
+# ex.
+# xonsh
+# event-model
+
 # This script will:
 
-# 1. pull all feedstocks from GitHub
-# 2. create a dependency graph of feedstocks
-# 3. update version numbers in the dependency graph
-# 4. create migrations, but not run them
-# 5. run migrations and submit pull requests on GitHub for the nsls-ii-forge
-# 6. display the status of migrations/pull requests
+# 1. create a dependency graph of feedstocks
+# 2. update version numbers in the dependency graph
+# 3. create migrations, but not run them
+# 4. run migrations and submit pull requests on GitHub for the nsls-ii-forge
+# 5. display the status of migrations/pull requests
 
 # This will use ~/.conda-smithy authentication for GitHub token
 # It will use nsls2forge username on GitHub
@@ -20,8 +25,11 @@
 # will stop execution if error occurs
 set -e
 
-# get all feedstock names and write them to names.txt
-all-feedstocks list -u $GITHUB_USERNAME -t $GITHUB_TOKEN -o nsls-ii-forge -w
+# remove this (TEST ONLY)
+echo -e "xonsh\nevent-model\ncpplint" > names.txt
+echo "=================="
+cat names.txt
+echo "=================="
 # create graph with node_attrs/* and graph.json
 graph-utils make -o nsls-ii-forge -c -f names.txt -m 10
 # update graph with new versions from their sources (see versions/*)
