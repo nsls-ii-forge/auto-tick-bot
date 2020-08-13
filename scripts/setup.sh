@@ -15,13 +15,16 @@ echo "password $GITHUB_TOKEN" >> $HOME/.netrc
 chmod -v 600 $HOME/.netrc
 
 # installation
-conda create -n botenv python=3.7 -y
+conda create -n botenv python=3.7 git -y
 conda activate botenv
 conda install -c conda-forge conda-smithy -y
-pip install nsls2forge-utils
+pip install git+https://github.com/nsls-ii-forge/nsls2forge-utils
 conda list --show-channel-url
 conda info
 pip install git+https://github.com/regro/cf-scripts@db87055b000e0ce9ea2fa5a82f55be0fb15613f2
 wget https://raw.githubusercontent.com/regro/cf-scripts/master/requirements/run
+echo "================"
+cat run
+echo "================"
 conda install -c conda-forge --file run -y
 rm -fv run
