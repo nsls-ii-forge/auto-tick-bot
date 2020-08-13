@@ -16,3 +16,5 @@ steps:
 - script: |
     bash ./scripts/auto_tick.sh
   displayName: 'Run auto-tick bot'
+  env:
+    GITHUB_TOKEN: $(GITHUB_TOKEN)
