@@ -26,6 +26,7 @@
 set -e
 
 # activate environment from setup.sh
+source ~/mc/etc/profile.d/conda.sh
 conda env list
 conda activate botenv
 # remove this (TEST ONLY)
