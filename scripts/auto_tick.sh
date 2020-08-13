@@ -25,6 +25,9 @@
 # will stop execution if error occurs
 set -e
 
+# activate environment from setup.sh
+conda env list
+conda activate botenv
 # remove this (TEST ONLY)
 echo -e "xonsh\nevent-model\ncpplint" > names.txt
 echo "=================="
