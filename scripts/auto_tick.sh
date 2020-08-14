@@ -42,7 +42,7 @@ time graph-utils update
 # dry run of migrations to catch errors before PRs
 auto-tick run --dry-run
 # full run of migrations and submit PRs (see pr_json/*)
-time auto-tick run --fork
+time auto-tick run
 # output status of migrations to status/*
 auto-tick status
 # cleanup
