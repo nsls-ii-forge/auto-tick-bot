@@ -31,7 +31,7 @@ conda env list
 conda activate botenv
 # clone graph repo to get cached graph
 git clone --depth 1 https://github.com/nsls-ii-forge/auto-tick-graph.git
-cp names.txt ./auto-tick-graph/names.txt
+cp names.txt ./auto-tick-graph/
 cd ./auto-tick-graph/
 # list of packages to be updated (in graph)
 echo "=================="
@@ -60,4 +60,5 @@ auto-tick status
 cat ./status/could_use_help.json
 cat ./status/version_status.json
 # cleanup
+rm -rfv ./auto-tick-graph
 auto-tick clean -y
