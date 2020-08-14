@@ -29,8 +29,7 @@ set -e
 source ~/mc/etc/profile.d/conda.sh
 conda env list
 conda activate botenv
-# remove this (TEST ONLY)
-echo -e "xonsh\nevent-model\ncpplint" > names.txt
+# list of packages to be updated (in graph)
 echo "=================="
 cat names.txt
 echo "=================="
