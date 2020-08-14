@@ -33,8 +33,6 @@ conda activate botenv
 echo "=================="
 cat names.txt
 echo "=================="
-# print env variables
-env | sort
 # clean current directory of bot files
 auto-tick clean -y
 # create graph with node_attrs/* and graph.json
