@@ -43,7 +43,7 @@ time graph-utils make -o nsls-ii-forge -c -f names.txt -m 10
 time graph-utils update
 # push changes to graph repo
 git add .
-git commit -m "Update graph (auto-tick-bot)"
+git commit -m "Update graph from auto-tick-bot [$(BUILD_BUILDNUMBER)]"
 git push origin master
 # move out of auto-tick-graph
 cd ..
