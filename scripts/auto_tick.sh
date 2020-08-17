@@ -50,9 +50,16 @@ time graph-utils update
 cd ..
 
 # copy graph files
-cp ./auto-tick-graph/graph.json ./ -v
-cp -r ./auto-tick-graph/node_attrs ./ -v
-cp -r ./auto-tick-graph/versions ./ -v
+cp -v ./auto-tick-graph/graph.json ./
+cp -rv ./auto-tick-graph/node_attrs ./
+cp -rv ./auto-tick-graph/versions ./
+# need checks for these since they might not be generated yet
+if [ -d "./auto-tick-graph/pr_json" ]; then
+    cp -rv ./auto-tick-graph/pr_json ./
+fi
+if [ -d "./auto-tick-graph/status" ]; then
+    cp -rv ./auto-tick-graph/status ./
+fi
 
 # dry run of migrations to catch errors before PRs
 auto-tick run --dry-run
@@ -66,9 +73,11 @@ cat ./status/could_use_help.json
 cat ./status/version_status.json
 
 # copy changed files back
-cp graph.json ./auto-tick-graph -v
-cp -r ./node_attrs ./auto-tick-graph -v
-cp -r ./versions ./auto-tick-graph -v
+cp -v graph.json ./auto-tick-graph
+cp -rv ./node_attrs ./auto-tick-graph
+cp -rv ./versions ./auto-tick-graph
+cp -rv ./pr_json ./auto-tick-graph
+cp -rv ./status ./auto-tick-graph
 cd ./auto-tick-graph
 
 # push changes to graph repo
