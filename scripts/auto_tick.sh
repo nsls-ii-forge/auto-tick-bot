@@ -48,7 +48,7 @@ if [ ! -z "$BUILD_BUILDNUMBER" ]; then
 else
     commit_msg="Update graph from auto-tick-bot [local $(hostname)]"
 fi
-git commit -m $commit_msg
+git commit -m "${commit_msg}"
 git push origin master
 # move out of auto-tick-graph
 cd ..
