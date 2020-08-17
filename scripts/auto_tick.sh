@@ -72,6 +72,9 @@ cp -r ./versions ./auto-tick-graph -v
 cd ./auto-tick-graph
 
 # push changes to graph repo
+git stash
+git pull --all
+git stash pop
 git add .
 if [ ! -z "$BUILD_BUILDNUMBER" ]; then
     commit_msg="Update graph from auto-tick-bot [${BUILD_BUILDNUMBER}]"
