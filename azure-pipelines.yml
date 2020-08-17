@@ -11,6 +11,8 @@ pool:
 steps:
 - script: bash ./scripts/setup.sh
   displayName: 'Prepare the environment'
+  env:
+    GITHUB_TOKEN: $(GITHUB_TOKEN)
 
 - script: |
     bash ./scripts/auto_tick.sh
