@@ -58,7 +58,7 @@ cp -r ./auto-tick-graph/versions ./ -v
 auto-tick run --dry-run
 
 # full run of migrations and submit PRs (see pr_json/*)
-# time auto-tick run
+time auto-tick run
 
 # output status of migrations to status/*
 auto-tick status
