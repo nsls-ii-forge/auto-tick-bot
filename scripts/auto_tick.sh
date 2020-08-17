@@ -29,18 +29,48 @@ set -e
 source ~/mc/etc/profile.d/conda.sh
 conda env list
 conda activate botenv
+
 # clone graph repo to get cached graph
 git clone --depth 1 https://github.com/nsls-ii-forge/auto-tick-graph.git
-cp names.txt ./auto-tick-graph/
+# cp names.txt ./auto-tick-graph/
 cd ./auto-tick-graph/
+
 # list of packages to be updated (in graph)
-echo "=================="
-cat names.txt
-echo "=================="
+# echo "=================="
+# cat names.txt
+# echo "=================="
+
 # create graph with node_attrs/* and graph.json
-time graph-utils make -o nsls-ii-forge -c -f names.txt -m 10
+time graph-utils make -o nsls-ii-forge -m 10
+
 # update graph with new versions from their sources (see versions/*)
 time graph-utils update
+
+# move out of auto-tick-graph
+cd ..
+
+# copy graph files
+cp ./auto-tick-graph/graph.json ./ -v
+cp -r ./auto-tick-graph/node_attrs ./ -v
+cp -r ./auto-tick-graph/versions ./ -v
+
+# dry run of migrations to catch errors before PRs
+auto-tick run --dry-run
+
+# full run of migrations and submit PRs (see pr_json/*)
+# time auto-tick run
+
+# output status of migrations to status/*
+auto-tick status
+cat ./status/could_use_help.json
+cat ./status/version_status.json
+
+# copy changed files back
+cp graph.json ./auto-tick-graph -v
+cp -r ./node_attrs ./auto-tick-graph -v
+cp -r ./versions ./auto-tick-graph -v
+cd ./auto-tick-graph
+
 # push changes to graph repo
 git add .
 if [ ! -z "$BUILD_BUILDNUMBER" ]; then
@@ -48,22 +78,9 @@ if [ ! -z "$BUILD_BUILDNUMBER" ]; then
 else
     commit_msg="Update graph from auto-tick-bot [local $(hostname)]"
 fi
-git commit -m "${commit_msg}"
+git commit -m "${commit_msg}" || echo "Nothing to commit"
 git push origin master
-# move out of auto-tick-graph
 cd ..
-# copy graph files
-cp ./auto-tick-graph/graph.json ./ -v
-cp -r ./auto-tick-graph/node_attrs ./ -v
-cp -r ./auto-tick-graph/versions ./ -v
-# dry run of migrations to catch errors before PRs
-auto-tick run --dry-run
-# full run of migrations and submit PRs (see pr_json/*)
-time auto-tick run
-# output status of migrations to status/*
-auto-tick status
-cat ./status/could_use_help.json
-cat ./status/version_status.json
 # cleanup
 rm -rfv ./auto-tick-graph
 auto-tick clean -y
