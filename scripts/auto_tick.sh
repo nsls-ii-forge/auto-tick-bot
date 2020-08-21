@@ -52,7 +52,6 @@ cd ..
 # copy graph files
 cp -v ./auto-tick-graph/graph.json ./
 cp -rv ./auto-tick-graph/node_attrs ./
-cp -rv ./auto-tick-graph/versions ./
 # need checks for these since they might not be generated yet
 if [ -d "./auto-tick-graph/pr_json" ]; then
     cp -rv ./auto-tick-graph/pr_json ./
@@ -75,7 +74,6 @@ cat ./status/version_status.json
 # copy changed files back
 cp -v graph.json ./auto-tick-graph
 cp -rv ./node_attrs ./auto-tick-graph
-cp -rv ./versions ./auto-tick-graph
 cp -rv ./pr_json ./auto-tick-graph
 cp -rv ./status ./auto-tick-graph
 cd ./auto-tick-graph
