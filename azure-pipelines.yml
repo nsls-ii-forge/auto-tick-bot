@@ -1,7 +1,7 @@
+trigger: none
+
 jobs:
   - job: run_bot
-
-    trigger: none
 
     displayName: 'nsls2forge auto-tick-bot run'
 
