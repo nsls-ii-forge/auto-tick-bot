@@ -25,6 +25,12 @@
 # will stop execution if error occurs
 set -e
 
+if [ "$1" == "verbose" ]; then
+    VERBOSE="-v"
+else
+    VERBOSE=""
+fi
+
 # activate environment from setup.sh
 source ~/mc/etc/profile.d/conda.sh
 conda env list
@@ -50,14 +56,14 @@ time graph-utils update
 cd ..
 
 # copy graph files
-cp -v ./auto-tick-graph/graph.json ./
-cp -rv ./auto-tick-graph/node_attrs ./
+cp ${VERBOSE} ./auto-tick-graph/graph.json ./
+cp -r ${VERBOSE} ./auto-tick-graph/node_attrs ./
 # need checks for these since they might not be generated yet
 if [ -d "./auto-tick-graph/pr_json" ]; then
-    cp -rv ./auto-tick-graph/pr_json ./
+    cp -r ${VERBOSE} ./auto-tick-graph/pr_json ./
 fi
 if [ -d "./auto-tick-graph/status" ]; then
-    cp -rv ./auto-tick-graph/status ./
+    cp -r ${VERBOSE} ./auto-tick-graph/status ./
 fi
 
 # dry run of migrations to catch errors before PRs
@@ -72,10 +78,10 @@ cat ./status/could_use_help.json
 cat ./status/version_status.json
 
 # copy changed files back
-cp -v graph.json ./auto-tick-graph
-cp -rv ./node_attrs ./auto-tick-graph
-cp -rv ./pr_json ./auto-tick-graph
-cp -rv ./status ./auto-tick-graph
+cp ${VERBOSE} graph.json ./auto-tick-graph
+cp -r ${VERBOSE} ./node_attrs ./auto-tick-graph
+cp -r ${VERBOSE} ./pr_json ./auto-tick-graph
+cp -r ${VERBOSE} ./status ./auto-tick-graph
 cd ./auto-tick-graph
 
 # push changes to graph repo
@@ -92,5 +98,5 @@ git commit -m "${commit_msg}" || echo "Nothing to commit"
 git push origin master
 cd ..
 # cleanup
-rm -rfv ./auto-tick-graph
+rm -r -f ${VERBOSE} ./auto-tick-graph
 auto-tick clean -y

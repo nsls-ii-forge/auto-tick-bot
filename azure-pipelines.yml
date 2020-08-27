@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 trigger: none
-
+displayName: 'nsls2forge auto-tick-bot run'
 pool:
   vmImage: 'ubuntu-latest'
 
