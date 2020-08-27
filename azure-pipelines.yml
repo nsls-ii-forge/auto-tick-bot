@@ -1,21 +1,21 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+jobs:
+  - job: run_bot
 
-trigger: none
-displayName: 'nsls2forge auto-tick-bot run'
-pool:
-  vmImage: 'ubuntu-latest'
+    trigger: none
 
-steps:
-- script: bash ./scripts/setup.sh
-  displayName: 'Prepare the environment'
-  env:
-    GITHUB_TOKEN: $(GITHUB_TOKEN)
+    displayName: 'nsls2forge auto-tick-bot run'
 
-- script: |
-    bash ./scripts/auto_tick.sh
-  displayName: 'Run auto-tick bot'
-  env:
-    GITHUB_TOKEN: $(GITHUB_TOKEN)
+    pool:
+      vmImage: 'ubuntu-latest'
+
+    steps:
+    - script: bash ./scripts/setup.sh
+      displayName: 'Prepare the environment'
+      env:
+        GITHUB_TOKEN: $(GITHUB_TOKEN)
+
+    - script: |
+        bash ./scripts/auto_tick.sh
+      displayName: 'Run auto-tick bot'
+      env:
+        GITHUB_TOKEN: $(GITHUB_TOKEN)
