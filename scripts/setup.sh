@@ -45,7 +45,7 @@ pip install git+https://github.com/regro/cf-scripts@db87055b000e0ce9ea2fa5a82f55
 
 wget https://raw.githubusercontent.com/regro/cf-scripts/master/requirements/run
 echo "================"
-cat run
+cat run | sort -u
 echo "================"
 conda install -c conda-forge --file run -y
 
