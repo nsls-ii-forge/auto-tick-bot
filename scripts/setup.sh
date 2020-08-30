@@ -28,10 +28,11 @@ source ~/mc/etc/profile.d/conda.sh
 
 # installation
 conda info
-conda create -y -n botenv python=${PYTHON_VERSION} git
+conda create -y -n botenv python=${PYTHON_VERSION}
 conda activate botenv
 
 # Install the tools for bot:
+## conda install -y git
 ## pip install git+https://github.com/nsls-ii-forge/nsls2forge-utils
 # better use a package
 conda install -y -c nsls2forge nsls2forge-utils
