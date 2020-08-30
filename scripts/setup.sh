@@ -47,7 +47,7 @@ wget https://raw.githubusercontent.com/regro/cf-scripts/master/requirements/run
 echo "================"
 cat run | sort -u
 echo "================"
-conda install -c conda-forge --file run -y
+conda install -y -c conda-forge --file run
 
 rm -f ${VERBOSE} run
 
